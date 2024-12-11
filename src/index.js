@@ -18,22 +18,22 @@ const createContainerDiv = (containerId) => {
   return container;
 };
 
-const appContainer = createContainerDiv("appContainer");
-const operationContainer = createContainerDiv("operationContainer");
-const inputContainer = createContainerDiv("inputContainer");
-const inputSizeContainer = createContainerDiv('inputSizeContainer');
-const btnContainer = createContainerDiv("btnContainer");
-const pixelContainer = createContainerDiv("pixelContainer");
+const createLabeledInput = (labelText, inputId, inputType = "text") => {
+  const container = document.createElement("div");
+  const label = document.createElement("label");
+  const input = document.createElement("input");
 
-const organizeContainer = () => {
-  app.appendChild(appContainer);
-  appContainer.appendChild(operationContainer);
-  operationContainer.appendChild(inputContainer);
-  operationContainer.appendChild(btnContainer);
-  appContainer.appendChild(pixelContainer);  
-}
+  label.htmlFor = inputId;
+  label.innerHTML = labelText;
+  input.id = inputId;
+  input.type = inputType;
+  container.id = 'labeledInputContainer'
 
-organizeContainer();
+  container.appendChild(label);
+  container.appendChild(input);
+
+  return container;
+};
 
 const createGrid = () => {
   pixelContainer.innerHTML = "";
@@ -53,57 +53,49 @@ const createGrid = () => {
   }
 };
 
-createGrid();
+const createLayout = () => {
+  const appContainer = createContainerDiv("appContainer");
+  const operationContainer = createContainerDiv("operationContainer");
+  const btnContainer = createContainerDiv("btnContainer");
+  const pixelContainer = createContainerDiv("pixelContainer");
 
-const createLabeledInput = (labelText, inputId, inputType = "text") => {
-  const container = document.createElement("div");
-  const label = document.createElement("label");
-  const input = document.createElement("input");
-
-  label.htmlFor = inputId;
-  label.innerHTML = labelText;
-  input.id = inputId;
-  input.type = inputType;
-  container.id = 'labeledInputContainer'
-
-  container.appendChild(label);
-  container.appendChild(input);
-
-  return container;
-};
-
-const inputColorContainer = createLabeledInput(
-  "Color: ",
-  "inputColor",
-  "color"
-);
-
-const inputRowContainer = createLabeledInput("Row: ", "inputRow", "number");
-const inputColumnContainer = createLabeledInput(
-  "Column: ",
-  "inputColumn",
-  "number"
-);
-const resetBtn = document.createElement("button");
-resetBtn.id = "resetBtn";
-resetBtn.innerHTML = "RESET";
-
-const organizeInput = () => {
+  app.appendChild(appContainer);
+  appContainer.appendChild(operationContainer);
+  operationContainer.appendChild(btnContainer);
+  appContainer.appendChild(pixelContainer);  
+  
+  const inputColorContainer = createLabeledInput(
+    "Color: ",
+    "inputColor",
+    "color"
+  );
+  
+  const inputRowContainer = createLabeledInput("Row: ", "inputRow", "number");
+  const inputColumnContainer = createLabeledInput(
+    "Column: ",
+    "inputColumn",
+    "number"
+  );
+  
+  const resetBtn = document.createElement("button");
+  resetBtn.id = "resetBtn";
+  resetBtn.innerHTML = "RESET";
+  
+  const inputSizeContainer = createContainerDiv('inputSizeContainer');
+  const inputContainer = createContainerDiv("inputContainer");
+  
   inputContainer.appendChild(inputColorContainer);
+  operationContainer.appendChild(inputContainer);
   inputSizeContainer.appendChild(inputColumnContainer);
   inputSizeContainer.appendChild(inputRowContainer);
   inputContainer.appendChild(inputSizeContainer);
   btnContainer.appendChild(resetBtn);
+
+createGrid();
 }
 
-organizeInput();
 
-const inputColor = document.getElementById("inputColor");
-const inputColumn = document.getElementById("inputColumn");
-const inputRow = document.getElementById("inputRow");
-inputColor.value = state.backgroundColor;
-inputColumn.value = state.column;
-inputRow.value = state.row;
+createLayout();
 
 // Step 4: Event Listeners
 const inputChangeHandler = (key, value) => {
