@@ -12,6 +12,21 @@ const state = {
 };
 
 // Step 3: Utility Functions
+const resetState = () => {
+  state.backgroundColor = "#555";
+  state.column = 5;
+  state.row = 5;
+  inputRow.value = state.row;
+  inputColumn.value = state.column;
+  inputColor.value = state.backgroundColor;
+  createGrid();
+}
+
+const inputChangeHandler = (key, value) => {
+  state[key] = value;
+  createGrid();
+}
+
 const createContainerDiv = (containerId) => {
   const container = document.createElement("div");
   container.id = containerId;
@@ -98,11 +113,6 @@ createGrid();
 createLayout();
 
 // Step 4: Event Listeners
-const inputChangeHandler = (key, value) => {
-  state[key] = value;
-  createGrid();
-}
-
 inputColumn.addEventListener("change", (input) => {
   inputChangeHandler('column', parseInt(input.target.value))
 });
@@ -112,11 +122,5 @@ inputRow.addEventListener("change", (input) => {
 });
 
 resetBtn.addEventListener("click", () => {
-  state.backgroundColor = "#555";
-  state.column = 5;
-  state.row = 5;
-  inputRow.value = state.row;
-  inputColumn.value = state.column;
-  inputColor.value = state.backgroundColor;
-  createGrid();
+  resetState();
 });
