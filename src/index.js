@@ -1,21 +1,21 @@
 // Step 1: HTML Structure Initialization
 const app = document.getElementById("app");
 app.innerHTML = `
-<h1>Pixel Editor</h1>
+<header>PIXEL PALETTE<header>
 `;
 
 // Step 2: State Management
 const state = {
-  backgroundColor: "#555",
-  column: 5,
-  row: 5,
+  backgroundColor: "white",
+  column: 10,
+  row: 10,
 };
 
 // Step 3: Utility Functions
 const resetState = () => {
-  state.backgroundColor = "#555";
-  state.column = 5;
-  state.row = 5;
+  state.backgroundColor = "white";
+  state.column = 10;
+  state.row = 10;
 }
 
 const inputChangeHandler = (key, value) => {
@@ -38,7 +38,7 @@ const createLabeledInput = (labelText, inputId, inputType = "text") => {
   label.innerHTML = labelText;
   input.id = inputId;
   input.type = inputType;
-  container.id = 'labeledInputContainer'
+  container.classList = 'labeledInputContainer'
 
   container.appendChild(label);
   container.appendChild(input);
@@ -72,18 +72,17 @@ const createLayout = () => {
 
   app.appendChild(appContainer);
   appContainer.appendChild(operationContainer);
-  operationContainer.appendChild(btnContainer);
   appContainer.appendChild(pixelContainer);  
   
   const {container: inputColorContainer, input: inputColor} = createLabeledInput(
-    "Color: ",
+    "Color ",
     "inputColor",
     "color"
   );
   
-  const { container: inputRowContainer, input: inputRow } = createLabeledInput("Row: ", "inputRow", "number");
+  const { container: inputRowContainer, input: inputRow } = createLabeledInput("Row ", "inputRow", "number");
   const { container: inputColumnContainer, input: inputColumn } = createLabeledInput(
-    "Column: ",
+    "Column ",
     "inputColumn",
     "number"
   );
@@ -101,6 +100,7 @@ const createLayout = () => {
   inputSizeContainer.appendChild(inputRowContainer);
   inputContainer.appendChild(inputSizeContainer);
   btnContainer.appendChild(resetBtn);
+  operationContainer.appendChild(btnContainer);
 
   createGrid();
 

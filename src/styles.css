@@ -1,35 +1,78 @@
 body {
-    font-family: sans-serif;
+  font-family: "Pixelify Sans", sans-serif;
+    color: white;
+    font-size: 32px;
+    margin: 0;
   }
+
+header {
+  position: fixed;
+  width: 100%;
+  font-size: 64px;
+  background-color: #6B6B6B;
+  text-align: center;
+  box-shadow: 0 3px 3px #333;
+}
   
   #appContainer {
     display: flex;
     flex-direction: row;
-    height: 500px;
+    height: 800px;
   }
+
+  #operationContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40%;
+    background-color: #6B6B6B;
+    padding-top: 20%;
+  }
+
   
   #inputContainer {
     display: flex;
     flex-direction: column;
-    margin-bottom: 50px;
+    margin: 0 0 80px 0;
+    padding: 0;
   }
 
-  #operationContainer {
-    width: 200px; 
+  #inputColor {
+    padding:0;
+    border: none;
+    background: none;
+    height: 36px;
+  }
+
+  #inputColumn, #inputRow{
+    font-family: "Pixelify Sans", sans-serif;
+    font-size: 24px;
+    width: 40px;
+    color: #6B6B6B;
+  }
+
+  .labeledInputContainer {
+    margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+  }
+
+  #resetBtn {
+    font-family: "Pixelify Sans", sans-serif;
+    font-size: 16px;
+    padding: 10px 20px;
+    background-color: white;
+    border: none;
+    border-radius: 10px;
+    color: #6B6B6B;
   }
   
   #pixelContainer {
     display: grid;
-    margin-left: 100px;
-    gap: 10px;
+    gap: 2px;
+    width: 60%;
+    background-color: #444;
+    padding-top: 15%;
+    justify-content: center;
   }
-  
-  #inputRow,
-  #inputColumn {
-    width: 30px;
-  }
-  
-  .pixel {
-    background-color: #555;
-  }
-  
