@@ -16,10 +16,6 @@ const resetState = () => {
   state.backgroundColor = "#555";
   state.column = 5;
   state.row = 5;
-  inputRow.value = state.row;
-  inputColumn.value = state.column;
-  inputColor.value = state.backgroundColor;
-  createGrid();
 }
 
 const inputChangeHandler = (key, value) => {
@@ -47,7 +43,7 @@ const createLabeledInput = (labelText, inputId, inputType = "text") => {
   container.appendChild(label);
   container.appendChild(input);
 
-  return container;
+  return { container, input };
 };
 
 const createGrid = () => {
@@ -79,14 +75,14 @@ const createLayout = () => {
   operationContainer.appendChild(btnContainer);
   appContainer.appendChild(pixelContainer);  
   
-  const inputColorContainer = createLabeledInput(
+  const {container: inputColorContainer, input: inputColor} = createLabeledInput(
     "Color: ",
     "inputColor",
     "color"
   );
   
-  const inputRowContainer = createLabeledInput("Row: ", "inputRow", "number");
-  const inputColumnContainer = createLabeledInput(
+  const { container: inputRowContainer, input: inputRow } = createLabeledInput("Row: ", "inputRow", "number");
+  const { container: inputColumnContainer, input: inputColumn } = createLabeledInput(
     "Column: ",
     "inputColumn",
     "number"
@@ -96,7 +92,7 @@ const createLayout = () => {
   resetBtn.id = "resetBtn";
   resetBtn.innerHTML = "RESET";
   
-  const inputSizeContainer = createContainerDiv('inputSizeContainer');
+  const inputSizeContainer = createContainerDiv("inputSizeContainer");
   const inputContainer = createContainerDiv("inputContainer");
   
   inputContainer.appendChild(inputColorContainer);
@@ -106,21 +102,28 @@ const createLayout = () => {
   inputContainer.appendChild(inputSizeContainer);
   btnContainer.appendChild(resetBtn);
 
-createGrid();
+  createGrid();
+
+  return {inputColor, inputRow, inputColumn, resetBtn};
+
 }
 
-
-createLayout();
+const {inputColor, inputRow, inputColumn, resetBtn} = createLayout();
 
 // Step 4: Event Listeners
-inputColumn.addEventListener("change", (input) => {
-  inputChangeHandler('column', parseInt(input.target.value))
-});
 
 inputRow.addEventListener("change", (input) => {
   inputChangeHandler('row', parseInt(input.target.value)) 
 });
 
+inputColumn.addEventListener("change", (input) => {
+  inputChangeHandler('column', parseInt(input.target.value))
+});
+
 resetBtn.addEventListener("click", () => {
   resetState();
+  inputRow.value = state.row;
+  inputColumn.value = state.column;
+  inputColor.value = state.backgroundColor;
+  createGrid();
 });
