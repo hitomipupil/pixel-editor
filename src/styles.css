@@ -1,35 +1,34 @@
 body {
     font-family: sans-serif;
-  }
-  
-  #appContainer {
+}
+
+#appContainer {
     display: flex;
     flex-direction: row;
     height: 500px;
-  }
-  
-  #inputContainer {
+}
+
+.inputContainer {
     display: flex;
     flex-direction: column;
     margin-bottom: 50px;
-  }
+}
 
-  #operationContainer {
-    width: 200px; 
-  }
-  
-  #pixelContainer {
+#operationContainer {
+    width: 200px;
+}
+
+#pixelContainer {
     display: grid;
     margin-left: 100px;
     gap: 10px;
-  }
-  
-  #inputRow,
-  #inputColumn {
+}
+
+#inputRow,
+#inputColumn {
     width: 30px;
-  }
-  
-  .pixel {
+}
+
+.pixel {
     background-color: #555;
-  }
-  
+}

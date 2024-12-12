@@ -16,16 +16,12 @@ const resetState = () => {
   state.backgroundColor = "#555";
   state.column = 5;
   state.row = 5;
-  inputRow.value = state.row;
-  inputColumn.value = state.column;
-  inputColor.value = state.backgroundColor;
-  createGrid();
-}
+};
 
 const inputChangeHandler = (key, value) => {
   state[key] = value;
   createGrid();
-}
+};
 
 const createContainerDiv = (containerId) => {
   const container = document.createElement("div");
@@ -42,12 +38,12 @@ const createLabeledInput = (labelText, inputId, inputType = "text") => {
   label.innerHTML = labelText;
   input.id = inputId;
   input.type = inputType;
-  container.id = 'labeledInputContainer'
+  container.classList.add("labeledInputContainer");
 
   container.appendChild(label);
   container.appendChild(input);
 
-  return container;
+  return { container, input };
 };
 
 const createGrid = () => {
@@ -77,28 +73,26 @@ const createLayout = () => {
   app.appendChild(appContainer);
   appContainer.appendChild(operationContainer);
   operationContainer.appendChild(btnContainer);
-  appContainer.appendChild(pixelContainer);  
-  
-  const inputColorContainer = createLabeledInput(
-    "Color: ",
-    "inputColor",
-    "color"
+  appContainer.appendChild(pixelContainer);
+
+  const { container: inputColorContainer, input: inputColor } =
+    createLabeledInput("Color: ", "inputColor", "color");
+
+  const { container: inputRowContainer, input: inputRow } = createLabeledInput(
+    "Row: ",
+    "inputRow",
+    "number",
   );
-  
-  const inputRowContainer = createLabeledInput("Row: ", "inputRow", "number");
-  const inputColumnContainer = createLabeledInput(
-    "Column: ",
-    "inputColumn",
-    "number"
-  );
-  
+  const { container: inputColumnContainer, input: inputCol } =
+    createLabeledInput("Column: ", "inputColumn", "number");
+
   const resetBtn = document.createElement("button");
   resetBtn.id = "resetBtn";
   resetBtn.innerHTML = "RESET";
-  
-  const inputSizeContainer = createContainerDiv('inputSizeContainer');
+
+  const inputSizeContainer = createContainerDiv("inputSizeContainer");
   const inputContainer = createContainerDiv("inputContainer");
-  
+
   inputContainer.appendChild(inputColorContainer);
   operationContainer.appendChild(inputContainer);
   inputSizeContainer.appendChild(inputColumnContainer);
@@ -106,21 +100,28 @@ const createLayout = () => {
   inputContainer.appendChild(inputSizeContainer);
   btnContainer.appendChild(resetBtn);
 
-createGrid();
-}
+  createGrid();
 
+  return { inputColor, inputCol, inputRow, resetBtn };
+};
 
-createLayout();
+const { inputColor, inputCol, inputRow, resetBtn } = createLayout();
 
 // Step 4: Event Listeners
-inputColumn.addEventListener("change", (input) => {
-  inputChangeHandler('column', parseInt(input.target.value))
+inputCol.addEventListener("change", (input) => {
+  inputChangeHandler("column", parseInt(input.target.value));
 });
 
 inputRow.addEventListener("change", (input) => {
-  inputChangeHandler('row', parseInt(input.target.value)) 
+  inputChangeHandler("row", parseInt(input.target.value));
 });
 
 resetBtn.addEventListener("click", () => {
   resetState();
+
+  inputRow.value = state.row;
+  inputCol.value = state.column;
+  inputColor.value = state.backgroundColor;
+
+  createGrid();
 });
