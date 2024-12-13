@@ -58,7 +58,7 @@ const createGrid = () => {
     const pixel = document.createElement("div");
     pixel.classList.add("pixel");
     pixel.style.backgroundColor = state.backgroundColor;
-    pixel.addEventListener("click", (e) => {
+    pixel.addEventListener("mousedown", (e) => {
       const selectedColor = inputColor.value;
       e.target.style.backgroundColor = selectedColor;
     });
