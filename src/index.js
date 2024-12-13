@@ -7,6 +7,7 @@ app.innerHTML = `
 // Step 2: State Management
 const state = {
   backgroundColor: "white",
+  color: "#ff0000",
   column: 10,
   row: 10,
 };
@@ -29,7 +30,7 @@ const createContainerDiv = (containerId) => {
   return container;
 };
 
-const createLabeledInput = (labelText, inputId, inputType = "text") => {
+const createLabeledInput = (labelText, inputId, inputType = "text", inputValue) => {
   const container = document.createElement("div");
   const label = document.createElement("label");
   const input = document.createElement("input");
@@ -38,6 +39,7 @@ const createLabeledInput = (labelText, inputId, inputType = "text") => {
   label.innerHTML = labelText;
   input.id = inputId;
   input.type = inputType;
+  input.value = inputValue;
   container.classList = 'labeledInputContainer'
 
   container.appendChild(label);
@@ -77,14 +79,16 @@ const createLayout = () => {
   const {container: inputColorContainer, input: inputColor} = createLabeledInput(
     "Color ",
     "inputColor",
-    "color"
+    "color",
+    "#ff0000"
   );
   
-  const { container: inputRowContainer, input: inputRow } = createLabeledInput("Row ", "inputRow", "number");
+  const { container: inputRowContainer, input: inputRow } = createLabeledInput("Row ", "inputRow", "number", 10);
   const { container: inputColumnContainer, input: inputColumn } = createLabeledInput(
     "Column ",
     "inputColumn",
-    "number"
+    "number",
+    10
   );
   
   const resetBtn = document.createElement("button");
@@ -124,6 +128,6 @@ resetBtn.addEventListener("click", () => {
   resetState();
   inputRow.value = state.row;
   inputColumn.value = state.column;
-  inputColor.value = state.backgroundColor;
+  inputColor.value = state.color;
   createGrid();
 });

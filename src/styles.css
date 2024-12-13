@@ -52,10 +52,11 @@ header {
   }
 
   .labeledInputContainer {
+    display: grid;
+    grid-template-columns: 100px auto;
+    align-items: center;
+    gap: 30px;
     margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
   }
 
   #resetBtn {
@@ -63,6 +64,16 @@ header {
     font-size: 16px;
     padding: 10px 20px;
     background-color: white;
+    border: none;
+    border-radius: 10px;
+    color: #6B6B6B;
+  }
+
+  #resetBtn:hover{
+    font-family: "Pixelify Sans", sans-serif;
+    font-size: 16px;
+    padding: 10px 20px;
+    background-color: #ddd;
     border: none;
     border-radius: 10px;
     color: #6B6B6B;
