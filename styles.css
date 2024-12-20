@@ -17,7 +17,7 @@ header {
   #appContainer {
     display: flex;
     flex-direction: row;
-    height: 800px;
+    height: 80%;
   }
 
   #operationContainer {
@@ -86,4 +86,29 @@ header {
     background-color: #444;
     padding-top: 15%;
     justify-content: center;
+  }
+
+  @media only screen and (max-width: 600px) {
+    #appContainer {
+      display: flex;
+    flex-direction: column-reverse;
+    }
+
+    #operationContainer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      background-color: #6B6B6B;
+      padding-top: 20%;
+    }
+
+    #pixelContainer {
+      display: grid;
+      gap: 2px;
+      width: 100%;
+      background-color: #444;
+      padding-top: 15%;
+      justify-content: center;
+    }
   }
